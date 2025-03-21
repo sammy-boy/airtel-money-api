@@ -1,0 +1,13 @@
+GET http://127.0.0.1:8000/csrf-token
+Content-Type: application/json
+
+###
+
+POST http://127.0.0.1:8000/initiate-payment
+Content-Type: application/json
+X-CSRF-TOKEN: sWcmGsV1c8sAb2Uh9CLKuzqdCwDXFZBs68toQCzh
+
+{
+  "msisdn": "737431346",
+  "amount": 1
+}
