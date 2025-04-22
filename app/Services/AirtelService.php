@@ -33,12 +33,6 @@ class AirtelService
 
     protected function getAccessToken()
     {
-        $cacheKey = 'airtel_access_token';
-
-        if (Cache::has($cacheKey)) {
-            return Cache::get($cacheKey);
-        }
-
         try {
             $response = $this->client->post($this->baseUrl . '/auth/oauth2/token', [
                 'headers' => ['Content-Type' => 'application/json', 'Accept' => '*/*'],
@@ -51,8 +45,7 @@ class AirtelService
 
             $data = json_decode($response->getBody(), true);
             $accessToken = $data['access_token'];
-
-            Cache::put($cacheKey, $accessToken, now()->addMinutes(55)); // Cache for 55 minutes
+            
             return $accessToken;
 
         } catch (ClientException $e) {
